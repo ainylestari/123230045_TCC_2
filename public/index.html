@@ -4,13 +4,16 @@
     <title>Notes App</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1>Notes App</h1>
 
-<input type="text" id="judul" placeholder="Judul">
-<textarea id="isi" placeholder="Isi"></textarea>
-<button onclick="saveNote()">Simpan</button>
+<div class="form">
+    <input type="text" id="judul" placeholder="Judul">
+    <textarea id="isi" placeholder="Isi"></textarea>
+    <button onclick="saveNote()">Simpan</button>
+</div>
 
 <h2>Daftar Catatan</h2>
 <div id="notes"></div>

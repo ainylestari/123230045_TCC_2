@@ -8,6 +8,10 @@ h1 {
     color: #2b6cb0;
 }
 
+.form {
+    margin-bottom: 20px;
+}
+
 input, textarea {
     width: 100%;
     max-width: 400px;
@@ -23,6 +27,8 @@ button {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    background: #2b6cb0;
+    color: white;
 }
 
 button:hover {
