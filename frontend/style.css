@@ -1,0 +1,38 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #eaf4ff;
+    padding: 20px;
+}
+
+h1 {
+    color: #2b6cb0;
+}
+
+input, textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.note {
+    background: white;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}

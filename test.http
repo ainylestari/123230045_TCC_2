@@ -1,0 +1,7 @@
+PUT http://localhost:3000/notes/1
+Content-Type: application/json
+
+{
+  "judul": "Edit manual",
+  "isi": "Tes edit"
+}
