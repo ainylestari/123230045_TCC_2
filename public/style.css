@@ -2,7 +2,12 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: #eaf4ff;
     padding: 20px;
-    
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* tengah horizontal */
+    justify-content: flex-start; /* tetap dari atas */
+    min-height: 100vh;  
 }
 
 h1 {
