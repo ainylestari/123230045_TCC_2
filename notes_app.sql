@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2026 at 05:57 PM
+-- Generation Time: Mar 26, 2026 at 01:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,6 +42,24 @@ CREATE TABLE `notes` (
 INSERT INTO `notes` (`id`, `judul`, `isi`, `createdAt`, `updatedAt`) VALUES
 (1, 'test', 'test simpen ini nya dlusss', '2026-03-20 08:14:54', '2026-03-20 08:14:54');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sequelizemeta`
+--
+
+CREATE TABLE `sequelizemeta` (
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `sequelizemeta`
+--
+
+INSERT INTO `sequelizemeta` (`name`) VALUES
+('20260320065140-create-note.js'),
+('20260320080112-add-timestamps-to-notes.js');
+
 --
 -- Indexes for dumped tables
 --
@@ -51,6 +69,13 @@ INSERT INTO `notes` (`id`, `judul`, `isi`, `createdAt`, `updatedAt`) VALUES
 --
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sequelizemeta`
+--
+ALTER TABLE `sequelizemeta`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
