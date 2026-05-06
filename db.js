@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'notes_app',
+    host: '34.172.113.167',
+    user: 'admin',
+    password: 'mypassword',
+    database: 'notes_123230045',
 });
 
 db.connect((err) => {
@@ -16,7 +16,7 @@ const createTableQuery = `
 CREATE TABLE IF NOT EXISTS notes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     judul VARCHAR(255),
-    isi TEXT,
+    isi TEXT
 )
 `;
 
