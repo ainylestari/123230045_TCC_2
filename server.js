@@ -12,6 +12,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/notes', notesRoutes);
 
-app.listen(3000, '0.0.0.0', () => {
-    console.log('Server jalan di http://localhost:3000/notes');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server jalan di port ${PORT}`);
 });
