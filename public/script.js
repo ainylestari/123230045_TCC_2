@@ -1,4 +1,4 @@
-const API = "/notes";
+const API = "https://notes-backend-194342266835.asia-southeast2.run.app";
     let editId = null;
 
     async function loadNotes() {
