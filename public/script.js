@@ -1,86 +1,130 @@
-const API = "https://notes-backend-194342266835.asia-southeast2.run.app";
-    let editId = null;
+const API = "https://notes-backend-194342266835.asia-southeast2.run.app/notes";
+let editId = null;
 
-    async function loadNotes() {
-      const res = await fetch(API);
-      const data = await res.json();
+// LOAD NOTES
+async function loadNotes() {
+  const res = await fetch(API);
+  const data = await res.json();
 
-      const container = document.getElementById('notes');
-      container.innerHTML = '';
+  const container = document.getElementById("notes");
+  container.innerHTML = "";
 
-      data.forEach(note => {
-        const div = document.createElement('div');
-        div.className = 'note';
+  data.forEach(note => {
+    const div = document.createElement("div");
+    div.className = "note";
 
-        div.innerHTML = `
-          <h3>${note.judul}</h3>
-          <p>${note.isi}</p>
-          <small>🕒 ${formatDate(note.createdAt)}</small>
-          <div class="action">
-            <button class="edit-btn" onclick='editNote(${JSON.stringify(note)})'>Edit</button>
-            <button class="delete-btn" onclick='deleteNote(${note.id})'>Hapus</button>
-          </div>
-        `;
+    div.innerHTML = `
+      <h3>${note.judul}</h3>
+      <p>${note.isi}</p>
 
-        container.appendChild(div);
-      });
-    }
+      <small>📅 Tanggal Dibuat: ${formatDate(note.tanggal_dibuat)}</small>
+      <small>🕒 Created At: ${formatDate(note.createdAt)}</small>
 
-    function formatDate(date) {
-      const d = new Date(date);
-      return d.toLocaleString();
-    }
+      <div class="action">
+        <button class="edit-btn" onclick='editNote(${JSON.stringify(note)})'>
+          Edit
+        </button>
+        <button class="delete-btn" onclick='deleteNote(${note.id})'>
+          Hapus
+        </button>
+      </div>
+    `;
 
-    async function saveNote() {
-      const judul = document.getElementById('judul').value;
-      const isi = document.getElementById('isi').value;
+    container.appendChild(div);
+  });
+}
 
-      if (!judul || !isi) {
-        alert("Isi semua field!");
-        return;
-      }
+// FORMAT DATE
+function formatDate(date) {
+  if (!date) return "-";
 
-      if (editId) {
-        await fetch(`${API}/${editId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ judul, isi })
-        });
+  const d = new Date(date);
+  return d.toLocaleString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
 
-        editId = null;
-      } else {
-        await fetch(API, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ judul, isi })
-        });
-      }
+// SAVE NOTE
+async function saveNote() {
+  const judul = document.getElementById("judul").value;
+  const isi = document.getElementById("isi").value;
 
-      resetForm();
-      loadNotes();
-    }
+  if (!judul || !isi) {
+    alert("Isi semua field!");
+    return;
+  }
 
-    function editNote(note) {
-      document.getElementById('judul').value = note.judul;
-      document.getElementById('isi').value = note.isi;
-      editId = note.id;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  // otomatis ambil tanggal sekarang
+  const tanggal_dibuat = new Date().toISOString();
 
-    async function deleteNote(id) {
-      if (!confirm("Yakin mau hapus catatan ini?")) return;
+  if (editId) {
+    // UPDATE
+    await fetch(`${API}/${editId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        judul,
+        isi,
+        tanggal_dibuat
+      })
+    });
 
-      await fetch(`${API}/${id}`, {
-        method: 'DELETE'
-      });
+    editId = null;
+  } else {
+    // CREATE
+    await fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        judul,
+        isi,
+        tanggal_dibuat
+      })
+    });
+  }
 
-      loadNotes();
-    }
+  resetForm();
+  loadNotes();
+}
 
-    function resetForm() {
-      document.getElementById('judul').value = '';
-      document.getElementById('isi').value = '';
-      editId = null;
-    }
+// EDIT NOTE
+function editNote(note) {
+  document.getElementById("judul").value = note.judul;
+  document.getElementById("isi").value = note.isi;
 
-    loadNotes();
+  editId = note.id;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+// DELETE NOTE
+async function deleteNote(id) {
+  if (!confirm("Yakin mau hapus catatan ini?")) return;
+
+  await fetch(`${API}/${id}`, {
+    method: "DELETE"
+  });
+
+  loadNotes();
+}
+
+// RESET FORM
+function resetForm() {
+  document.getElementById("judul").value = "";
+  document.getElementById("isi").value = "";
+  editId = null;
+}
+
+// INIT
+loadNotes();
