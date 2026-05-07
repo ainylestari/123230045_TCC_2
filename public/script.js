@@ -17,8 +17,7 @@ async function loadNotes() {
       <h3>${note.judul}</h3>
       <p>${note.isi}</p>
 
-      <small>📅 Tanggal Dibuat: ${formatDate(note.tanggal_dibuat)}</small>
-      <small>🕒 Created At: ${formatDate(note.createdAt)}</small>
+      <small>${formatDate(note.tanggal_dibuat)}</small>
 
       <div class="action">
         <button class="edit-btn" onclick='editNote(${JSON.stringify(note)})'>
