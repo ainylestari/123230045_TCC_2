@@ -31,7 +31,8 @@ router.put('/:id', async (req, res) => {
         await Note.update(
             {
                 judul: req.body.judul,
-                isi: req.body.isi
+                isi: req.body.isi,
+                tanggal_dibuat: req.body.tanggal_dibuat
             },
             {
                 where: { id: req.params.id }
